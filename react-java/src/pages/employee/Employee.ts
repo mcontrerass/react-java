@@ -5,4 +5,5 @@ export default interface Employee {
     apellidoPaterno?: string;
     apellidoMaterno?: string;
     email?: string;
+    cargo?: string;
 }

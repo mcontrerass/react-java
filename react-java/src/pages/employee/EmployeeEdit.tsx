@@ -92,6 +92,16 @@ const EmployeeEdit: React.FC = () => {
                                 </IonItem>
                             </IonCol>
                         </IonRow>
+                        <IonRow>
+                            <IonCol>
+                                <IonItem>
+                                    <IonLabel position="stacked">Cargo</IonLabel>
+                                    <IonInput onIonChange={e => employee.cargo = String(e.detail.value)}
+                                    value={employee.cargo}
+                                    placeholder="Cargo"></IonInput>
+                                </IonItem>
+                            </IonCol>
+                        </IonRow>
                         <IonItem>
                             <IonButton onClick={save} color="success" fill="solid" slot="end" size="default">
                                 <IonIcon icon={checkmark} />
