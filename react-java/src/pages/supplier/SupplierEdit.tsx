@@ -3,12 +3,12 @@ import { add, checkmark, close, pencil } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
-import Vendor from './Vendor';
-import { saveVendor, searchVendorById } from './VendorApi';
+import Supplier from './Supplier';
+import { saveSupplier, searchSupplierById } from './SupplierApi';
 
-const VendorEdit: React.FC = () => {
+const SupplierEdit: React.FC = () => {
     const { name, id } = useParams<{ name: string; id: string }>();
-    const [vendor, setVendor] = useState<Vendor>({});
+    const [supplier, setSupplier] = useState<Supplier>({});
     const history = useHistory();
 
     useEffect(() => {
@@ -17,14 +17,14 @@ const VendorEdit: React.FC = () => {
 
     const search = () => {
         if (id !== 'new') {
-            let result = searchVendorById(id);
-            setVendor(result);
+            let result = searchSupplierById(id);
+            setSupplier(result);
         }
     }
 
     const save = () => {
-        saveVendor(vendor);
-        history.push('/page/vendors');
+        saveSupplier(supplier);
+        history.push('/page/suppliers');
     }
 
     return (
@@ -50,35 +50,35 @@ const VendorEdit: React.FC = () => {
                             <IonCol>
                                 <IonItem>
                                     <IonLabel position="stacked">Documento</IonLabel>
-                                    <IonInput onIonChange={e => vendor.documento = String(e.detail.value)}
-                                    value={vendor.documento}
+                                    <IonInput onIonChange={e => supplier.documento = String(e.detail.value)}
+                                    value={supplier.documento}
                                     placeholder="RUT o documento de identificación"></IonInput>
                                 </IonItem>
                             </IonCol>
                             <IonCol>
                                 <IonItem>
-                                    <IonLabel position="stacked">Nombres</IonLabel>
-                                    <IonInput onIonChange={e => vendor.nombres = String(e.detail.value)}
-                                    value={vendor.nombres}
-                                    placeholder="Nombres"></IonInput>
+                                    <IonLabel position="stacked">Nombre</IonLabel>
+                                    <IonInput onIonChange={e => supplier.nombre = String(e.detail.value)}
+                                    value={supplier.nombre}
+                                    placeholder="Nombre"></IonInput>
                                 </IonItem>
                             </IonCol>
                         </IonRow>
                         <IonRow>
                             <IonCol>
                                 <IonItem>
-                                    <IonLabel position="stacked">Apellido Paterno</IonLabel>
-                                    <IonInput onIonChange={e => vendor.apellidoPaterno = String(e.detail.value)}
-                                    value={vendor.apellidoPaterno}
-                                    placeholder="Apellido Paterno"></IonInput>
+                                    <IonLabel position="stacked">Teléfono</IonLabel>
+                                    <IonInput onIonChange={e => supplier.telefono = String(e.detail.value)}
+                                    value={supplier.telefono}
+                                    placeholder="Teléfono"></IonInput>
                                 </IonItem>
                             </IonCol>
                             <IonCol>
                                 <IonItem>
-                                    <IonLabel position="stacked">Apellido Materno</IonLabel>
-                                    <IonInput onIonChange={e => vendor.apellidoMaterno = String(e.detail.value)}
-                                    value={vendor.apellidoMaterno}
-                                    placeholder="Apellido Materno"></IonInput>
+                                    <IonLabel position="stacked">Web</IonLabel>
+                                    <IonInput onIonChange={e => supplier.web = String(e.detail.value)}
+                                    value={supplier.web}
+                                    placeholder="Web"></IonInput>
                                 </IonItem>
                             </IonCol>
                         </IonRow>
@@ -86,9 +86,19 @@ const VendorEdit: React.FC = () => {
                             <IonCol>
                                 <IonItem>
                                     <IonLabel position="stacked">Email</IonLabel>
-                                    <IonInput onIonChange={e => vendor.email = String(e.detail.value)}
-                                    value={vendor.email}
+                                    <IonInput onIonChange={e => supplier.email = String(e.detail.value)}
+                                    value={supplier.email}
                                     placeholder="Email"></IonInput>
+                                </IonItem>
+                            </IonCol>
+                        </IonRow>
+                        <IonRow>
+                            <IonCol>
+                                <IonItem>
+                                    <IonLabel position="stacked">Representante</IonLabel>
+                                    <IonInput onIonChange={e => supplier.representante = String(e.detail.value)}
+                                    value={supplier.representante}
+                                    placeholder="Representante"></IonInput>
                                 </IonItem>
                             </IonCol>
                         </IonRow>
@@ -105,4 +115,4 @@ const VendorEdit: React.FC = () => {
     );
 };
 
-export default VendorEdit;
+export default SupplierEdit;
