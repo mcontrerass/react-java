@@ -1,28 +1,30 @@
 import Customer from "./Customer";
 
-export function searchCustomers() {
-    if (!localStorage['customers']) {
-        localStorage['customers'] = '[]';
-    }
+export async function searchCustomers() {
+    let url = process.env.REACT_APP_API + 'customers'
+    let response = await fetch(url, {
+        "method": 'GET',
+        "headers": {
+            "Content-Type": 'application/json' 
+        }
+    })
 
-    let customers = localStorage['customers'];
-    customers = JSON.parse(customers);
-    return customers;
+    return await response.json();
 }
 
-export function removeCustomer(id: string) {
-    let customers = searchCustomers();
-    let indice = customers.findIndex((customer: Customer) => customer.id == id);
+export async function removeCustomer(id: string) {
+    let customers = await searchCustomers();
+    let indice = customers.findIndex((customer: Customer) => customer.id === id);
     customers.splice(indice, 1);
     localStorage['customers'] = JSON.stringify(customers);
 }
 
-export function saveCustomer(customer: Customer) {
-    let customers = searchCustomers();
+export async function saveCustomer(customer: Customer) {
+    let customers = await searchCustomers();
 
     if (customer.id) {
         //Editar
-        let indice = customers.findIndex((c: Customer) => c.id == customer.id);
+        let indice = customers.findIndex((c: Customer) => c.id === customer.id);
         customers[indice] = customer;
     } else {
         //Nuevo
@@ -32,7 +34,7 @@ export function saveCustomer(customer: Customer) {
     localStorage['customers'] = JSON.stringify(customers);
 }
 
-export function searchCustomerById(id: string) {
-    let customers = searchCustomers();
-    return customers.find((customer: any) => customer.id == id);
+export async function searchCustomerById(id: string) {
+    let customers = await searchCustomers();
+    return customers.find((customer: any) => customer.id === id);
 }

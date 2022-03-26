@@ -15,9 +15,9 @@ const CustomerEdit: React.FC = () => {
         search();
     }, []);
 
-    const search = () => {
+     const search = async () => {
         if (id !== 'new') {
-            let result = searchCustomerById(id);
+            let result = await searchCustomerById(id);
             setCustomer(result);
         }
     }
