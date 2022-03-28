@@ -8,20 +8,20 @@ import { removeSupplier, searchSuppliers } from './SupplierApi';
 
 const SupplierList: React.FC = (props: any) => {
   const { name } = useParams<{ name: string; }>();
-  const [proveedores, setEmpleados] = useState<Supplier[]>([]);
+  const [proveedores, setProveedores] = useState<Supplier[]>([]);
   const history = useHistory();
 
   useEffect(() => {
     search();
   }, [history.location.pathname]);
 
-  const search = () => {
-    let result = searchSuppliers();
-    setEmpleados(result);
+  const search = async () => {
+    let result = await searchSuppliers();
+    setProveedores(result);
   }
 
-  const remove = (id: string) => {
-    removeSupplier(id);
+  const remove = async (id: string) => {
+    await removeSupplier(id);
     search();
   }
 

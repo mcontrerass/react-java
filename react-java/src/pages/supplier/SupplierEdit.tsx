@@ -1,29 +1,33 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { add, checkmark, close, pencil } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams, useRouteMatch } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
 import Supplier from './Supplier';
 import { saveSupplier, searchSupplierById } from './SupplierApi';
 
 const SupplierEdit: React.FC = () => {
-    const { name, id } = useParams<{ name: string; id: string }>();
+    const { name } = useParams<{ name: string; }>();
     const [supplier, setSupplier] = useState<Supplier>({});
     const history = useHistory();
+    const routeMatch: any = useRouteMatch("/page/supplier/:id");
+    const id = routeMatch?.params?.id;
 
     useEffect(() => {
         search();
-    }, []);
+    }, [history.location.pathname]);
 
-    const search = () => {
-        if (id !== 'new') {
-            let result = searchSupplierById(id);
+    const search = async () => {
+        if (id === 'new') {
+            setSupplier({});
+        } else {
+            let result = await searchSupplierById(id);
             setSupplier(result);
         }
     }
 
-    const save = () => {
-        saveSupplier(supplier);
+    const save = async () => {
+        await saveSupplier(supplier);
         history.push('/page/suppliers');
     }
 

@@ -1,5 +1,5 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { add, close, pencil } from 'ionicons/icons';
+import { add, close, pencil, sync } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
@@ -20,8 +20,8 @@ const CustomerList: React.FC = (props: any) => {
     setClientes(result);
   }
 
-  const remove = (id: string) => {
-    removeCustomer(id);
+  const remove = async (id: string) => {
+    await removeCustomer(id);
     search();
   }
 
